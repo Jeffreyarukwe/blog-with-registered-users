@@ -12,7 +12,6 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from dotenv import load_dotenv
 import os
 
-
 '''
 Make sure the required packages are installed: 
 Open the Terminal in PyCharm (bottom left). 
@@ -43,8 +42,8 @@ def load_user(user_id):
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DB_URI", "sqlite:///posts.db")
+
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -258,4 +257,4 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5003)
+    app.run(debug=False)
